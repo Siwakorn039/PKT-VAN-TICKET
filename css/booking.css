@@ -1,0 +1,57 @@
+.page {
+    font-family: 'Kanit', sans-serif;
+}
+
+select {
+    font-family: 'Kanit', sans-serif;
+}
+
+input {
+    font-family: 'Kanit', sans-serif;
+}
+
+
+.button {
+    font-family: 'Kanit', sans-serif;
+}
+
+
+#time {
+    margin-left: 0%;
+}
+
+
+
+
+
+input[type=text],
+select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #65CEEE;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Kanit', sans-serif;
+}
+
+
+div {
+    border-radius: 5px;
+    background-color: #F2F2F2;
+    padding: 20px;
+}
+
+

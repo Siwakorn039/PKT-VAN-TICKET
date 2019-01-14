@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>payment</title>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <style>
+
+
+        a {
+            font-family: 'Kanit', sans-serif;
+        }
+
+       .page {
+            font-family: 'Kanit', sans-serif;
+        }
+
+    </style>
+</head>
+
+<body>
+    <ons-page id="helloworld-page">
+        <ons-toolbar style="background-color:#58D9E2;">
+            <div class="center">กรุณาชำระเงิน</div>
+        </ons-toolbar>
+        <p style="margin-left:45%;"><a>ช่องทางการชำระเงิน</a></p>
+        <img src="Images/visa.png" style="width:3%; margin-left: 45%">
+        <img src="Images/master.png" style="width:3%;">
+        <img src="Images/un.png" style="width:3%;">
+
+        <div style="text-align: center; margin-top: 30px;">
+            <p>
+                <ons-input id="bankName" modifier="underbar" placeholder="ชื่อธนาคาร" float></ons-input>
+            </p>
+            <p>
+                <ons-input id="cardNo" modifier="underbar" placeholder="หมายเลขบัตร" float></ons-input>
+            </p>
+            <p>
+                <ons-input id="cardName" modifier="underbar" placeholder="ชื่อบนบัตร" float></ons-input>
+            </p>
+            <p>
+                <ons-input id="expDay" modifier="underbar" placeholder="วันหมดอายุ" float></ons-input>
+            </p>
+            <p>
+                <ons-input id="cvc" modifier="underbar" placeholder="รหัส cvc" float></ons-input>
+            </p>
+
+            <p style="margin-top: 30px;">
+                <button class="btn btn-primary" onclick="btnSend()"><a>จองและจ่ายทันที</a></button>
+            </p>
+    </ons-page>
+
+    
+
+    <script>
+        function btnSend() {
+            window.location.href = "home.html";
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+  <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+  <title>booking2</title>
+  <!-- <link rel="stylesheet" href="font.css"> -->
+  <style>
+    .page {
+      font-family: 'Kanit', sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <ons-page id="helloworld-page">
+    <ons-toolbar style="background-color: #58D9E2;">
+      <div class="center">ตั๋วของฉัน</div>
+    </ons-toolbar>
+    <br>
+
+  </ons-page>
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+  <script>
+    var txt_title, txt_content, txt_img = '';
+    var config = {
+      apiKey: "AIzaSyBW3NZStD3hyZ4we7MxnatN-t75eevUW4o",
+      authDomain: "pkt-van-ticket.firebaseapp.com",
+      databaseURL: "https://pkt-van-ticket.firebaseio.com",
+      projectId: "pkt-van-ticket",
+      storageBucket: "pkt-van-ticket.appspot.com",
+      messagingSenderId: "689535443331"
+    };
+
+    firebase.initializeApp(config);
+
+    var userid = localStorage.getItem('userid');
+    if (userid) {
+      $('#userid').html(userid);
+    }
+    console.log("userid=" + userid);
+
+
+    var database = firebase.database();
+
+
+    database.ref('Booking/' + userid + '/').once('child_added', function (snapshot) {
+      if (snapshot.exists()) {
+
+        var content = '';
+        snapshot.forEach(function (data) {
+
+          var val = data.val();
+          console.log("row", data.val());
+
+          content += '<ons-card>';
+          content += '<h3><a><font color="#FF0000">รายละเอียดการจอง</a></h3>';
+
+          content += '<ons-list-header>';
+          content += '<h4><a><font color="#3300FF" "class=fas fa-map-marker-alt">จุดขึ้นรถ:' + val.geton + '</a></h4></font>';
+          content += '</ons-list-header>';
+
+          content += '<ons-list-header>';
+          content += '<h4><a><font color="#3300FF" "fas fa-map-marked">จุดลงรถ:' + val.getdown + '</a></h4></font>';
+          content += '</ons-list-header>';
+
+          content += '<ons-list-header>';
+          content += '<h4><a><font color="#3300FF"far fa-clock">วันเดินทาง:' + val.datepicker + '</a></h4>';
+          content += '</ons-list-header>';
+
+          content += '<ons-list-header>';
+          content += '<h4><a><font color="#3300FF">เวลารถเดินรถ:' + val.cartime + '</a></h4>';
+          content += '</ons-list-header>';
+
+          content += '<ons-list-header>';
+          content += '<h4><a><font color="#3300FF">ชื่อผู้ขับ:' + val.nameDriver + '</a></h4>';
+          content += '</ons-list-header>';
+
+          content += '<ons-list-header>';
+          content += '<h4><a><font color="#3300FF">หมายเลขรถ:' + val.carNo + '</a></h4>';
+          content += '</ons-list-header>';
+
+          content += '<ons-list-header>';
+          content += '<h4><a><font color="#3300FF">ทะเบียนรถ:' + val.c + '</a></h4></font>';
+          content += '</ons-list-header>';
+
+
+          content += '<ons-list-header>';
+          content += '<h4><a><font color="#3300FF">ราคา:' + val.price + '</a></h4></font>';
+          content += '</ons-list-header>';
+
+          content += '<ons-list-header>';
+          content += '<h4><a><font color="#3300FF">ราคา:' + val.phonNum + '</a></h4></font>';
+          content += '</ons-list-header>';
+
+
+
+
+          content += '</ons-list-item><br>';
+
+          content += '</ons-card>';
+
+        });
+
+
+        var theDiv = document.getElementById("ex-table");
+        theDiv.innerHTML += content;
+        // $('#ex-table').append(content);
+      }
+
+    });
+  </script>
+
+</body>
+
+</html>

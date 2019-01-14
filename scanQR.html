@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.3/firebase.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.10/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/booking.css">
+    <script src="js/booking.js"></script>
+
+
+    <title>QR Scan</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    <style>
+        body, input {font-size:14pt}
+input, label {vertical-align:middle}
+.qrcode-text {padding-right:1.7em; margin-right:0}
+.qrcode-text-btn {display:inline-block; background:url(http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2017/07/1499401426qr_icon.svg) 50% 50% no-repeat; height:1em; width:1.7em; margin-left:-1.7em; cursor:pointer}
+.qrcode-text-btn > input[type=file] {position:absolute; overflow:hidden; width:1px; height:1px; opacity:0}
+</style>
+</head>
+
+<body>
+
+    <body>
+
+        <ons-page>
+
+            <ons-toolbar style="background-color: #58D9E2;">
+                <div class="center">SCAN QR</div>
+            </ons-toolbar>
+            <ons-card>
+
+                    <center><img class="mySlides" src="images/qr-code.png" style="width:15%"></center>
+
+                    <br>
+                <div class="container">
+                    <input type=text size=16 placeholder="Tracking Code" class=qrcode-text><label class=qrcode-text-btn><input
+                            type=file accept="image/*" capture=environment onclick="return showQRIntro();" onchange="openQRCamera(this);"
+                            tabindex=-1></label>
+
+                </div>
+                <!-- Optional JavaScript -->
+                <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+                <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                    crossorigin="anonymous"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+                    crossorigin="anonymous"></script>
+                <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+                    crossorigin="anonymous"></script>
+                <script src="https://rawgit.com/sitepoint-editors/jsqrcode/master/src/qr_packed.js">
+                </script>
+                <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+
+                <ss id="showData">
+
+                    <script>
+
+                        var config = {
+                            apiKey: "AIzaSyBW3NZStD3hyZ4we7MxnatN-t75eevUW4o",
+                            authDomain: "pkt-van-ticket.firebaseapp.com",
+                            databaseURL: "https://pkt-van-ticket.firebaseio.com",
+                            projectId: "pkt-van-ticket",
+                            storageBucket: "pkt-van-ticket.appspot.com",
+                            messagingSenderId: "689535443331"
+                        };
+
+                        firebase.initializeApp(config);
+
+                        var database = firebase.database();
+
+
+                        function openQRCamera(node) {
+                            var reader = new FileReader();
+                            reader.onload = function () {
+                                node.value = "";
+                                qrcode.callback = function (res) {
+                                    if (res instanceof Error) {
+                                        alert("No QR code found. Please make sure the QR code is within the camera's frame and try again.");
+                                    } else {
+                                        node.parentNode.previousElementSibling.value = res;
+                                        console.log(res);
+
+                                        var ref = database.ref(res);
+                                        ref.once("value", function (snapshot) {
+                                            //snapshot.forEach(function (data) {
+
+                                            var content = '';
+
+                                            var val = snapshot.val();
+                                            console.log("row", val);
+
+                                            content += ' <ons-card>'
+
+                                            
+                                            content += '<h5><a><font color="#3300FF">ต้นทาง</a></h5></font>';
+                        
+                                            content += '<ons-list-item >' + val.geton + '</ons-list-item>';
+                                            
+                                            
+                                            content += '<h5><a><font color="#3300FF">ปลายทาง</a></h5></font>';
+                                           
+                                            content += '<ons-list-item >' + val.getdown + '</ons-list-item>';
+
+                                           
+                                            content += '<h5><a><font color="#3300FF">วันเดินทาง</a></h5></font>';
+                                           
+                                            content += '<ons-list-item >' + val.datepicker + '</ons-list-item>';
+
+                                           
+                                            content += '<h5><a><font color="#3300FF">ราคาตั๋ว</a></h5></font>';
+                                          
+                                            content += '<ons-list-item >' + val.price + '</ons-list-item>';
+                                            
+                                            
+                                            content += '<h5><a><font color="#3300FF">ทะเบียนรถ</a></h5></font>';
+                                            
+                                            content += '<ons-list-item >' + val.c + '</ons-list-item>';
+                                           
+                                            
+                                            content += '<h5><a><font color="#3300FF">เลขรถ</a></h5></font>';
+                                           
+                                            content += '<ons-list-item >' + val.carNo + '</ons-list-item>';
+                                            
+                                            
+                                            content += '<h5><a><font color="#3300FF">ชื่อคนขับรถ</a></h5></font>';
+                                            
+                                            content += '<ons-list-item >' + val.nameDriver + '</ons-list-item>';
+                                            
+                                            
+                                            content += '<h5><a><font color="#3300FF">เบอร์โทรศัพท์คนขับรถ</a></h5></font>';
+                                            
+                                            content += '<ons-list-item >' + val.phonNum + '</ons-list-item>';
+                                            
+
+                                            var theDiv = document.getElementById("showData");
+                                            theDiv.innerHTML += content;
+                                            $('#ex-table').append(content);
+
+
+                                            //});
+                                        });
+
+                                        function showQRIntro() {
+                                            return confirm("Use your camera to take a picture of a QR code.");
+                                        }
+                                    }
+                                };
+                                qrcode.decode(reader.result);
+                            };
+                            reader.readAsDataURL(node.files[0]);
+                        }
+                    </script>
+
+
+            </ons-card>
+
+
+    </body>
+
+</html>

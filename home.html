@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+    <script src="js/index.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif" rel="stylesheet">
+    <style>
+        .mySlides {display:none;}
+</style>
+
+    <style>
+        .page {
+            font-family: 'Kanit', sans-serif;
+        }
+
+        a {
+            font-family: 'Kanit', sans-serif;
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+        b {
+            font-family: 'Bree Serif', serif;
+        }
+
+        
+
+    
+    </style>
+</head>
+
+
+
+<body>
+    <ons-page>
+        <ons-toolbar style="background-color: #58D9E2;">
+            <div class="center">
+                <h4><b>PKT VAN TICKET</b></h4>
+                </i>
+            </div>
+        </ons-toolbar>
+
+        <ons-tabbar swipeable position="auto">
+            <ons-tab page="tab1.html" label="PKT VAN TICKET" icon="ion-home, material:md-home" active>
+            </ons-tab>
+            <ons-tab page="tab2.html" label="ตั๋วของฉัน" icon="fa-car" active-icon="fa-car">
+            </ons-tab>
+            <ons-tab page="tab3.html" label="ประวัติการจอง" icon="fa-file" active-icon="fa-file">
+            </ons-tab>
+            <ons-tab page="tab4.html" label="บัญชีของฉัน" icon="md-settings" active-icon="md-face">
+            </ons-tab>
+        </ons-tabbar>
+
+        </template>
+
+        <template id="tab1.html">
+            <ons-page id="Tab1">
+
+                <ons-card>
+                    <p style="text-align: right;">
+                        <br>
+
+                        <i class="fas fa-sign-out-alt"> <button type="button" class="btn btn-outline-danger" onclick="btnLogOut()"><a>ออกจากระบบ</a></button></i>
+
+                        <body>
+
+                            <a>
+                                <h2 class="w3-center">จองตั๋วงรถตู้ได้ง่ายๆสะดวกสบายไปกับ PKT VAN TICKET</h2>
+                            </a>
+
+                            <div class="w3-content w3-section" style="max-width:500px">
+                                <img class="mySlides" src="images/van.jpg" style="width:100%">
+                                <img class="mySlides" src="images/van.jpg" style="width:100%">
+                            </div>
+                </ons-card>
+                <script>
+                    var myIndex = 0;
+                    carousel();
+
+                    function carousel() {
+                        var i;
+                        var x = document.getElementsByClassName("mySlides");
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = "none";
+                        }
+                        myIndex++;
+                        if (myIndex > x.length) { myIndex = 1 }
+                        x[myIndex - 1].style.display = "block";
+                        setTimeout(carousel, 4000); // Change image every 2 seconds
+                    }
+                </script>
+
+                <br>
+
+                <p style="text-align: center;">
+                    <button class="btn btn-primary btn-lg btn-block" Primary onclick=" btnNext()">จองตั๋ว</button>
+                    
+                </p>
+                </p>
+            </ons-page>
+
+
+        </template>
+
+        <template id="tab2.html">
+            <ons-page id="Tab2">
+                <p style="text-align: center;">
+                    <ul class="list list--inset">
+                        <a href="myTicke.html" li class="list-item list--inset__item list-item--chevron list-item--tappable">
+                            <div class="list-item__center"><i class="fas fa-ticket-alt"></i>&nbsp; ตั๋วขึ้นรถ
+                </p>
+            </ons-page>
+        </template>
+
+        <template id="tab3.html">
+            <ons-page id="Tab3">
+                <p style="text-align: center;">
+                    <ul class="list list--inset">
+                        <a href="booking2.html" li class="list-item list--inset__item list-item--chevron list-item--tappable">
+                            <div class="list-item__center"><i class="far fa-file-alt"></i>&nbsp; ประวัติการจองทั้งหมด
+                            </div>
+                            </li>
+                        </a>
+
+                    </ul>
+                </p>
+            </ons-page>
+        </template>
+
+        <template id="tab4.html">
+            <ons-page id="Tab4">
+                <p style="text-align: center;">
+                    <ul class="list list--inset">
+                        <a href="payMent.html" li class="list-item list--inset__item list-item--chevron list-item--tappable">
+                            <div class="list-item__center"><i class="fas fa-credit-card"></i>&nbsp;ลงทะเบียนบัตรเครดิต</div>
+                            </li>
+                        </a>
+                    </ul>
+                </p>
+                </p>
+            </ons-page>
+        </template>
+</body>
+
+<script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyBW3NZStD3hyZ4we7MxnatN-t75eevUW4o",
+        authDomain: "pkt-van-ticket.firebaseapp.com",
+        databaseURL: "https://pkt-van-ticket.firebaseio.com",
+        projectId: "pkt-van-ticket",
+        storageBucket: "pkt-van-ticket.appspot.com",
+        messagingSenderId: "689535443331"
+    };
+    firebase.initializeApp(config);
+
+    firebase.auth().onAuthStateChanged(function (user) {
+
+        if (user) {
+            var email = user.email;
+            alert("ยินดีต้อนรับ" + email);
+            console.log("  Provider-specific UID: " + user.uid);
+            console.log("  Name: " + user.displayName);
+            console.log("  Email: " + user.email);
+        } else {
+            alert("ยืนยันการออกจากระบบ?");
+            window.location.href = "index.html";
+
+        }
+
+
+    });
+</script>
+
+<script>
+    function btnScan() {
+
+        window.location.href = "scanQr.html";
+    }
+</script>
+
+</html>
